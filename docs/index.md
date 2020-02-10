@@ -16,6 +16,7 @@ with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of
 
 ## Spatial and Temporal Discretization
 
+$\require{\tikz}$
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in Figure~\ref{fig:spatial_disc}.
 
 \begin{figure}[h]
