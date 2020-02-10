@@ -98,7 +98,7 @@ $$
 Thus, the finite difference equation for one-dimensional consolidation becomes
 
 $$
-\frac{u_i^{n+1} - u_i^n}{\Delta t} - c_\rmv \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta z^2} = 0
+\frac{u_i^{n+1} - u_i^n}{\Delta t} - c_v \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta z^2} = 0
 $$
 
 Based on this equation, the pore pressure values at time $$ t_{n+1} $$ can be obtained from known values from time $$ t_n $$, together with specified initial and boundary conditions. Solving for $$ u_i^{n+1} $$ gives
@@ -137,6 +137,6 @@ $$
 The explicit method is known to be numerically stable and convergent for \(\kappa \leq 1/2\). This implies that for a given spatial
 discretization, the time step must satisfy
 
-\[\Delta t \leq \frac{\Delta z^2}{2 c_\rmv}\] 
+\[\Delta t \leq \frac{\Delta z^2}{2 c_v}\] 
 
 for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time step and second-order accurate in space step, i.e. \(\mathcal{O}(\Delta t)\) and \(\mathcal{O}(\Delta z^2)\), respectively.
