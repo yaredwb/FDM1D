@@ -113,4 +113,30 @@ $$
 \kappa = c_\rmv \frac{\Delta t}{\Delta z^2}
 $$
 
-An illustration of the explicit method is shown in Figure~\ref{fig:explicit_stencil}, which is a so-called \emph{stencil}.
+An illustration of the explicit method is shown in Figure~\ref{fig:explicit_stencil}, which is a so-called *stencil*.
+
+$$
+\begin{tikzpicture}		
+  \draw[] (0,0) -- (4,0);
+  \draw[] (2,0) -- (2,2);
+  \filldraw[blue] (0,0) circle (2pt);
+  \filldraw[blue] (2,0) circle (2pt);
+  \filldraw[blue] (4,0) circle (2pt);
+  \filldraw[blue] (2,2) circle (2pt);		
+  \node [below] at (0,-0.25) {$ i-1,n $};
+  \node [below] at (2,-0.25) {$ i,n $};
+  \node [below] at (4,-0.25) {$ i+1,n $};
+  \node [above] at (2,2) {$ i,n+1 $};
+  \draw[->,-stealth,thick] (1.75,-1) -- (2.25,-1);
+  \node [right] at (2.25,-1) {$ z $};
+  \draw[->,-stealth,thick] (-1,0.75) -- (-1,1.25);
+  \node [above] at (-1,1.25) {$ t $};			
+\end{tikzpicture}
+$$
+
+The explicit method is known to be numerically stable and convergent for \(\kappa \leq 1/2\). This implies that for a given spatial
+discretization, the time step must satisfy
+
+\[\Delta t \leq \frac{\Delta z^2}{2 c_\rmv}\] 
+
+for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time step and second-order accurate in space step, i.e. \(\mathcal{O}(\Delta t)\) and \(\mathcal{O}(\Delta z^2)\), respectively.
