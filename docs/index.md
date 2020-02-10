@@ -14,6 +14,35 @@ $$
 
 with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of volumetric compressibility and $$ \gamma_w $$ the unit weight of water.
 
-### Spatial and Temporal Discretization
+## Spatial and Temporal Discretization
 
+We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in Figure~\ref{fig:spatial_disc}.
 
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+		\draw[thick] (0,0) -- (10,0);
+		\draw[] (0,0.3) -- (0,0.7);
+		\draw[->,-stealth] (0,0.5) -- (1,0.5);
+		\node [right] at (1,0.5) {$ z $};
+		\filldraw[blue] (0,0) circle (2pt);
+		\filldraw[blue] (1,0) circle (2pt);
+		\filldraw[blue] (4,0) circle (2pt);
+		\filldraw[blue] (5,0) circle (2pt);
+		\filldraw[blue] (6,0) circle (2pt);
+		\filldraw[blue] (9,0) circle (2pt);
+		\filldraw[blue] (10,0) circle (2pt);
+		\node [below] at (0,-0.25) {$ z_0 $};
+		\node [below] at (1,-0.25) {$ z_1 $};
+		\node [below] at (2.5,-0.25) {$ \cdots $};
+		\node [below] at (4,-0.25) {$ z_{i-1} $};
+		\node [below] at (5,-0.25) {$ z_i $};
+		\node [below] at (6,-0.25) {$ z_{i+1} $};
+		\node [below] at (7.5,-0.25) {$ \cdots $};
+		\node [below] at (9,-0.25) {$ z_{N-1} $};
+		\node [below] at (10,-0.25) {$ z_N $};
+		\end{tikzpicture}
+	\end{center}
+	\caption{Spatial discretization for 1D consolidation.}
+	\label{fig:spatial_disc}
+\end{figure}
