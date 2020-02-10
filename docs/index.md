@@ -18,7 +18,8 @@ with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
-$$\usetikzlibrary{decorations.pathmorphing}	
+$$\usepackage{tikz}
+\usetikzlibrary{arrows,calc,shapes,automata,positioning,decorations.markings}	
 \begin{tikzpicture}
 \draw[thick] (0,0) -- (10,0);
 \draw[] (0,0.3) -- (0,0.7);
