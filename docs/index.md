@@ -15,7 +15,7 @@ $$
 
 with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of volumetric compressibility and $$ \gamma_w $$ the unit weight of water.
 
-## Spatial and Temporal Discretization
+### Spatial and Temporal Discretization
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
