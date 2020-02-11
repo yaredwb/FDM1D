@@ -22,7 +22,7 @@ with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
-![image](FD_!D_mesh.png)
+![image](FD_1D_mesh.png)
 
 <!---
 $$
