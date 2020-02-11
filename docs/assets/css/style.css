@@ -2,7 +2,6 @@
 ---
 
 @import "{{ site.theme }}";
-
 .center
 {
     margin: 0 auto;
