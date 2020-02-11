@@ -124,9 +124,7 @@ $$
 
 An illustration of the explicit method is shown in the figure below, which is a so-called *stencil*.
 
-{:refdef: style="text-align: center;"}
-![Stencil for the explicit method](assets/images/explicit_stencil.png)
-{: refdef}
+![Stencil for the explicit method](assets/images/explicit_stencil.png){: .center}
 
 <!---
 $$
