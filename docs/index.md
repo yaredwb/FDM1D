@@ -1,4 +1,4 @@
-## One-dimensional Consolidation
+### Governing Equation
 
 The partial differential equation governing one-dimensional consolidation is given by
 
