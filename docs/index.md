@@ -22,6 +22,9 @@ with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
+![image](FD_!D_mesh.png)
+
+<!---
 $$
 \usetikzlibrary{arrows,calc,shapes,automata,positioning,decorations.markings}	
 \begin{tikzpicture}
@@ -47,6 +50,7 @@ $$
   \node [below] at (10,-0.25) {$$ z_N $$};
 \end{tikzpicture}
 $$
+--->
 
 The spatial discretization implies
 
@@ -60,6 +64,7 @@ $$
 t_n = n\Delta t
 $$
 
+<!---
 $$
 \begin{tikzpicture}
   \draw[->,-stealth,thick] (0,0) -- (10,0);
@@ -80,6 +85,7 @@ $$
   \node [below] at (10,-0.25) {$ t_n $};		
 \end{tikzpicture}
 $$
+--->
 
 The partial derivatives in the governing PDE, in equation \eqref{eq:1D_consolidation}, can be approximated in various ways with respect to time and space. The most common approximations are discussed here.
 
@@ -117,6 +123,7 @@ $$
 
 An illustration of the explicit method is shown in Figure~\ref{fig:explicit_stencil}, which is a so-called *stencil*.
 
+<!---
 $$
 \begin{tikzpicture}		
   \draw[] (0,0) -- (4,0);
@@ -135,6 +142,7 @@ $$
   \node [above] at (-1,1.25) {$ t $};			
 \end{tikzpicture}
 $$
+--->
 
 The explicit method is known to be numerically stable and convergent for \(\kappa \leq 1/2\). This implies that for a given spatial
 discretization, the time step must satisfy
