@@ -7,7 +7,6 @@ The partial differential equation governing one-dimensional consolidation is giv
 
 $$
 \frac{\partial u}{\partial t} - c_v \frac{\partial^2 u}{\partial z^2} = 0
-\label{eq:1D_consolidation}
 $$
 
 where $$ u $$ is the excess pore water pressure, $$ t $$ stands for time, $$ z $$ represents depth and $$ c_v $$ is the coefficient of consolidation which can be expressed as
@@ -22,7 +21,7 @@ with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
-![image](FD_1D_mesh.png)
+![image](assets/images/1D_spatial_disc.png)
 
 <!---
 $$
@@ -63,6 +62,8 @@ for a 1D domain with a unit width. Note that if we have a domain with a depth $$
 $$
 t_n = n\Delta t
 $$
+
+![image](assets/images/1D_temporal_disc.png)
 
 <!---
 $$
