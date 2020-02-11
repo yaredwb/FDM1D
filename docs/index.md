@@ -153,3 +153,52 @@ $$
 $$
 
 for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time step and second-order accurate in space step, i.e. $$\mathcal{O}(\Delta t)$$ and $$\mathcal{O}(\Delta z^2)$$, respectively.
+
+### Implicit Method
+
+In this method, the time derivative of the pore pressure is approximated using a backward difference equation, which at $$ t_n $$ and $$ z_i $$ is given by
+
+$$
+\frac{\partial u}{\partial t} = \frac{u_i^{n} - u_i^{n-1}}{\Delta t}
+$$
+
+With a similar approximation for the spatial derivative, the finite difference equation of the PDE based on the implicit method becomes
+
+$$
+\frac{u_i^{n} - u_i^{n-1}}{\Delta t} - c_v \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta z^2} = 0
+$$
+
+The stencil for the implicit method is shown in the figure below. Let's assume that the pore pressure values at time $$ t_{n-1} $$ are known and we want to compute those at time $$ t_n $$. Unlike the explicit method, we cannot solve for $$ u_i^n $$ directly because this unknown is coupled with its neighboring unknowns in space $$ u_{i-1}^n $$ and $$ u_{i+1}^n. $$
+
+![image](assets/images/implicit_stencil.png)
+
+Thus, the implicit method requires solving a system of equations at each time step. We will illustrate this for the simple case where $$ N=3 $$, i.e. a spatial discretization with 4 nodes. Let's assume that the values at the boundary nodes $$ z_0 $$ and $$ z_3 $$ are known from BCs. We can now use \eqref{eq:1D_cons_implicit_disc} to write the finite difference equations at the unknown nodes 1 and 2. This gives
+
+$$
+\begin{align}
+\frac{u_1^{n} - u_1^{n-1}}{\Delta t} - c_\rmv \frac{u_{2}^n - 2u_1^n + u_{0}^n}{\Delta z^2} &= 0 \\
+\frac{u_2^{n} - u_2^{n-1}}{\Delta t} - c_\rmv \frac{u_{3}^n - 2u_2^n + u_{1}^n}{\Delta z^2} &= 0
+\end{align}
+$$
+
+where $$ u_0^n $$ and $$ u_3^n $$ are know from BCs. The equations to be solved for the unknowns $$ u_1^n $$ and $$ u_2^n $$ are
+
+$$
+\begin{align}
+(1 + 2\kappa) u_1^n - \kappa u_2^n = \kappa u_0^n + u_1^{n-1} \\
+-\kappa u_1^n + (1 + 2\kappa) u_2^n = \kappa u_3^n + u_2^{n-1}
+\end{align}
+$$
+
+which in matrix form is
+
+$$
+\left[ \begin{matrix}
+1+2\kappa & -\kappa \\
+-\kappa & 1+2\kappa
+\end{matrix} \right] \left\lbrace \begin{matrix}
+u_1^n \\ u_2^n
+\end{matrix} \right\rbrace = \left\lbrace \begin{matrix}
+\kappa u_0^n + u_1^{n-1} \\ \kappa u_3^n + u_2^{n-1}
+\end{matrix} \right\rbrace  
+$$
