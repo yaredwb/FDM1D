@@ -88,7 +88,7 @@ $$
 $$
 --->
 
-The partial derivatives in the governing PDE, in equation \eqref{eq:1D_consolidation}, can be approximated in various ways with respect to time and space. The most common approximations are discussed here.
+The partial derivatives in the governing PDE can be approximated in various ways with respect to time and space. The most common approximations are discussed here.
 
 ### Explicit Method
 
@@ -122,7 +122,7 @@ $$
 \kappa = c_v \frac{\Delta t}{\Delta z^2}
 $$
 
-An illustration of the explicit method is shown in Figure~\ref{fig:explicit_stencil}, which is a so-called *stencil*.
+An illustration of the explicit method is shown in the figure below, which is a so-called *stencil*.
 
 <!---
 $$
