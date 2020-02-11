@@ -154,7 +154,7 @@ $$
 \Delta t \leq \frac{\Delta z^2}{2 c_v}
 $$
 
-for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time step and second-order accurate in space step, i.e. $$\mathcal{O}(\Delta t)$$ and $$\mathcal{O}(\Delta z^2)$$, respectively.
+for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time and second-order accurate in space, i.e. $$\mathcal{O}(\Delta t)$$ and $$\mathcal{O}(\Delta z^2)$$, respectively.
 
 ### Implicit Method
 
@@ -255,6 +255,88 @@ u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n
 \kappa \textcolor{blue}{u_0^n} + u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ \kappa \textcolor{blue}{u_N^n} + u_{N-1}^{n-1} \end{matrix} \right\rbrace
 $$
 
-which is a linear system of the form $$ \bm A \bm x = \bm b $$ that can be solved by applying the appropriate method. Like the explicit method, the error in the calculated pore pressure based on the implicit method is first-order accurate in time and second-order accurate in space, i.e. $$ \mathcal{O}(\Delta t) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
+which is a linear system of the form $$ \boldsymbol{A x = b} $$ that can be solved by applying the appropriate method. Like the explicit method, the error in the calculated pore pressure based on the implicit method is first-order accurate in time and second-order accurate in space, i.e. $$ \mathcal{O}(\Delta t) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
 
 ### Crank-Nicolson Method
+
+This method is a combination of the explicit and implicit methods. The time derivative is approximated using a central difference equation. This, at $$ t_{n+\frac{1}{2}} $$ and $$ z_i $$, is given by
+
+$$
+\frac{\partial u}{\partial t} = \frac{u_i^{n+1} - u_i^{n}}{2 \frac{\Delta t}{2}} = \frac{u_i^{n+1} - u_i^{n}}{\Delta t}
+$$
+
+The spatial derivative at $$ z_i $$, and at time level $$ t_{n+\frac{1}{2}} $$, may be approximated by
+
+$$
+\frac{\partial^2 u}{\partial z^2} = \frac{u_{i+1}^{n+\frac{1}{2}} - 2u_i^{n+\frac{1}{2}} + u_{i-1}^{n+\frac{1}{2}}}{\Delta z^2} 
+$$
+
+We will assume for all $$ i $$ that
+
+$$
+u_i^{n+\frac{1}{2}} \approx \frac{1}{2} \left( u_i^n + u_i^{n+1} \right) 
+$$
+
+since $$ u_i^{n+\frac{1}{2}} $$ is not what we are solving for. Thus, we obtain
+
+$$
+\frac{\partial^2 u}{\partial z^2} = \frac{1}{2} \left( \frac{u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}}{\Delta z^2} + \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta z^2} \right) 
+$$
+
+The finite difference equation of the PDE becomes
+
+$$
+\frac{u_i^{n+1} - u_i^{n}}{\Delta t} - \frac{c_\rmv}{2} \left( \frac{u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}}{\Delta z^2} + \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{\Delta z^2} \right) = 0
+$$
+
+The stencil for the Crank-Nicolson method is shown in the figure below.
+
+![Stencil for the Crank-Nocolson method](assets/images/crank_nicolson_stencil.png)
+
+Like the implicit method, the Crank-Nicolson method requires solving a system of equations at each time step since the unknown $$ u_i^{n+1} $$ is coupled with its neighboring unknowns $$ u_{i-1}^{n+1} $$ and $$ u_{i+1}^{n+1} $$. From the main difference equation above, we can write
+
+$$
+u_i^{n+1} - \frac{\kappa}{2} \left( u_{i+1}^{n+1} - 2 u_i^{n+1} + u_{i-1}^{n+1} \right) = u_i^n + \frac{\kappa}{2} \left( u_{i+1}^{n} - 2 u_i^{n} + u_{i-1}^{n} \right)
+$$
+
+which can be rearranged to give
+
+$$
+-\frac{\kappa}{2} u_{i-1}^{n+1} + (1+\kappa) u_i^{n+1} - \frac{\kappa}{2} u_{i+1}^{n+1} = \frac{\kappa}{2} u_{i-1}^n + (1-\kappa) u_i^n + \frac{\kappa}{2} u_{i+1}^n
+$$
+
+For an arbitrary value of $$ N $$, with known boundary values $$ u_0^{n+1} $$ and $$ u_N^{n+1} $$, the finite difference equations at the unknown nodes $$ i $$ for $$ i = 1,2,\cdots,N-2,N-1 $$, based on the previous equation, can be written as
+
+$$
+\begin{align}
+-\frac{\kappa}{2} \textcolor{blue}{u_{0}^{n+1}} + (1+\kappa) u_1^{n+1} - \frac{\kappa}{2} u_{2}^{n+1} &= \frac{\kappa}{2} u_{0}^n + (1-\kappa) u_1^n + \frac{\kappa}{2} u_{2}^n \nonumber \\
+-\frac{\kappa}{2} u_{1}^{n+1} + (1+\kappa) u_2^{n+1} - \frac{\kappa}{2} u_{3}^{n+1} &= \frac{\kappa}{2} u_{1}^n + (1-\kappa) u_2^n + \frac{\kappa}{2} u_{3}^n \nonumber \\
+\vdots \qquad \qquad \vdots & \qquad \qquad \vdots \\
+-\frac{\kappa}{2} u_{N-3}^{n+1} + (1+\kappa) u_{N-2}^{n+1} - \frac{\kappa}{2} u_{N-1}^{n+1} &= \frac{\kappa}{2} u_{N-3}^n + (1-\kappa) u_{N-2}^n + \frac{\kappa}{2} u_{N-1}^n \nonumber \\
+-\frac{\kappa}{2} u_{N-2}^{n+1} + (1+\kappa) u_{N-1}^{n+1} - \frac{\kappa}{2} \textcolor{blue}{u_{N}^{n+1}} &= \frac{\kappa}{2} u_{N-2}^n + (1-\kappa) u_{N-1}^n + \frac{\kappa}{2} u_{N}^n \nonumber
+\end{align}
+$$
+
+In matrix form, we have
+
+$$
+\left[ \begin{matrix}
+1+\kappa & -\frac{\kappa}{2} \\
+-\frac{\kappa}{2} & 1+\kappa & -\frac{\kappa}{2} \\
+&   \ddots & \ddots & \ddots \\
+&   &   \ddots & \ddots & \ddots \\
+&   &   &   -\frac{\kappa}{2} & 1+\kappa & -\frac{\kappa}{2} \\
+&   &   &   &   -\frac{\kappa}{2} & 1+\kappa 
+\end{matrix} \right] \left\lbrace \begin{matrix}
+u_1^{n+1} \\ u_2^{n+1} \\ \vdots \\ u_{N-2}^{n+1} \\ u_{N-1}^{n+1}  
+\end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
+b_1 + \frac{\kappa}{2} \textcolor{blue}{u_{0}^{n+1}} \\ b_2 \\ \vdots \\ b_{N-2} \\ b_{N-1} + \frac{\kappa}{2} \textcolor{blue}{u_{N}^{n+1}} \end{matrix} \right\rbrace
+$$
+
+where
+
+$$
+b_i = \frac{\kappa}{2} u_{i-1}^n + (1-\kappa) u_i^n + \frac{\kappa}{2} u_{i+1}^n
+$$
+
+for $$ i = 1,2,\cdots,N-1 $$. The error in the calculated pore pressure based on the Crank-Nicolson method is second-order accurate both in time and in space, i.e. $$ \mathcal{O}(\Delta t^2) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
