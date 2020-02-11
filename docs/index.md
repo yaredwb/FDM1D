@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-### Governing Equation
+### **Governing Equation**
 
 The partial differential equation governing one-dimensional consolidation is given by
 
@@ -17,7 +17,7 @@ $$
 
 with $$ k $$ being the coefficient of permeability, $$ m_v $$ the coefficient of volumetric compressibility and $$ \gamma_w $$ the unit weight of water.
 
-### Spatial and Temporal Discretization
+### **Spatial and Temporal Discretization**
 
 We will solve the consolidation problem over a 1D domain which is spatially discretized into $$ N $$ equally spaced units as shown in the figure below.
 
@@ -90,7 +90,7 @@ $$
 
 The partial derivatives in the governing PDE can be approximated in various ways with respect to time and space. The most common approximations are discussed here.
 
-### Explicit Method
+### **Explicit Method**
 
 In this method, the partial derivative of the excess pore pressure with respect to time is approximated using a forward difference equation. At time $$ t_n $$ and a spatial point $$ z_i $$, this approximation is given by
 
@@ -156,7 +156,7 @@ $$
 
 for numerical stability and convergence. The error in the calculated pore pressure based on the explicit method is first-order accurate in time and second-order accurate in space, i.e. $$\mathcal{O}(\Delta t)$$ and $$\mathcal{O}(\Delta z^2)$$, respectively.
 
-### Implicit Method
+### **Implicit Method**
 
 In this method, the time derivative of the pore pressure is approximated using a backward difference equation, which at $$ t_n $$ and $$ z_i $$ is given by
 
@@ -257,7 +257,7 @@ $$
 
 which is a linear system of the form $$ \boldsymbol{A x = b} $$ that can be solved by applying the appropriate method. Like the explicit method, the error in the calculated pore pressure based on the implicit method is first-order accurate in time and second-order accurate in space, i.e. $$ \mathcal{O}(\Delta t) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
 
-### Crank-Nicolson Method
+### **Crank-Nicolson Method**
 
 This method is a combination of the explicit and implicit methods. The time derivative is approximated using a central difference equation. This, at $$ t_{n+\frac{1}{2}} $$ and $$ z_i $$, is given by
 
@@ -341,7 +341,7 @@ $$
 
 for $$ i = 1,2,\cdots,N-1 $$. The error in the calculated pore pressure based on the Crank-Nicolson method is second-order accurate both in time and in space, i.e. $$ \mathcal{O}(\Delta t^2) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
 
-### Numerical Example
+### **Numerical Example**
 
 We will illustrate the three methods described earlier through an example. Consider a 1 m thick soil layer subjected to a surcharge loading of 50 kPa, see the figure below. The soil layer is drained both at the upper and lower boundaries i.e. the excess pore pressure can dissipate through both boundaries. The coefficient of consolidation of the soil is $$ 2 \times 10^{-6}~\mathrm{m^2/s} $$. For simplicity, we will ignore the initial hydrostatic pore pressure and focus only on the excess pore pressure.
 
