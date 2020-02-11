@@ -174,7 +174,7 @@ The stencil for the implicit method is shown in the figure below. Let's assume t
 
 ![Stencil for the implicit method](assets/images/implicit_stencil.png){: .center-image}
 
-Thus, the implicit method requires solving a system of equations at each time step. We will illustrate this for the simple case where $$ N=3 $$, i.e. a spatial discretization with 4 nodes. Let's assume that the values at the boundary nodes $$ z_0 $$ and $$ z_3 $$ are known from BCs. We can now use implicit difference equation above to write the finite difference equations at the unknown nodes 1 and 2. This gives
+Thus, the implicit method requires solving a system of equations at each time step. We will illustrate this for the simple case where $$ N=3 $$, i.e. a spatial discretization with 4 nodes. Let's assume that the values at the boundary nodes $$ z_0 $$ and $$ z_3 $$ are known from BCs. We can now use the implicit difference equation above to write the finite difference equations at the unknown nodes 1 and 2. This gives
 
 $$
 \begin{align}
