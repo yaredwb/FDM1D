@@ -2,8 +2,9 @@
 ---
 
 @import "{{ site.theme }}";
-.center
+.center-image
 {
     margin: 0 auto;
     display: block;
+    text-align: center;
 }
