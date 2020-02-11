@@ -124,6 +124,8 @@ $$
 
 An illustration of the explicit method is shown in the figure below, which is a so-called *stencil*.
 
+![Stencil for the explicit method](assets/images/explicit_stencil.png)
+
 <!---
 $$
 \begin{tikzpicture}		
@@ -145,7 +147,7 @@ $$
 $$
 --->
 
-The explicit method is known to be numerically stable and convergent for \(\kappa \leq 1/2\). This implies that for a given spatial
+The explicit method is known to be numerically stable and convergent for $$ \kappa \leq 1/2 $$. This implies that for a given spatial
 discretization, the time step must satisfy
 
 $$
@@ -170,14 +172,14 @@ $$
 
 The stencil for the implicit method is shown in the figure below. Let's assume that the pore pressure values at time $$ t_{n-1} $$ are known and we want to compute those at time $$ t_n $$. Unlike the explicit method, we cannot solve for $$ u_i^n $$ directly because this unknown is coupled with its neighboring unknowns in space $$ u_{i-1}^n $$ and $$ u_{i+1}^n. $$
 
-![image](assets/images/implicit_stencil.png)
+![Stencil for the implicit method](assets/images/implicit_stencil.png)
 
-Thus, the implicit method requires solving a system of equations at each time step. We will illustrate this for the simple case where $$ N=3 $$, i.e. a spatial discretization with 4 nodes. Let's assume that the values at the boundary nodes $$ z_0 $$ and $$ z_3 $$ are known from BCs. We can now use \eqref{eq:1D_cons_implicit_disc} to write the finite difference equations at the unknown nodes 1 and 2. This gives
+Thus, the implicit method requires solving a system of equations at each time step. We will illustrate this for the simple case where $$ N=3 $$, i.e. a spatial discretization with 4 nodes. Let's assume that the values at the boundary nodes $$ z_0 $$ and $$ z_3 $$ are known from BCs. We can now use implicit difference equation above to write the finite difference equations at the unknown nodes 1 and 2. This gives
 
 $$
 \begin{align}
-\frac{u_1^{n} - u_1^{n-1}}{\Delta t} - c_\rmv \frac{u_{2}^n - 2u_1^n + u_{0}^n}{\Delta z^2} &= 0 \\
-\frac{u_2^{n} - u_2^{n-1}}{\Delta t} - c_\rmv \frac{u_{3}^n - 2u_2^n + u_{1}^n}{\Delta z^2} &= 0
+\frac{u_1^{n} - u_1^{n-1}}{\Delta t} - c_v \frac{u_{2}^n - 2u_1^n + u_{0}^n}{\Delta z^2} &= 0 \\
+\frac{u_2^{n} - u_2^{n-1}}{\Delta t} - c_v \frac{u_{3}^n - 2u_2^n + u_{1}^n}{\Delta z^2} &= 0
 \end{align}
 $$
 
@@ -202,3 +204,57 @@ u_1^n \\ u_2^n
 \kappa u_0^n + u_1^{n-1} \\ \kappa u_3^n + u_2^{n-1}
 \end{matrix} \right\rbrace  
 $$
+
+In general, for an arbitrary $$ N $$, the algebraic equations for all unknowns at interior spatial points are written out based on the implicit difference equation in a form
+
+$$
+-\kappa u_{i-1}^n + (1 + 2\kappa) u_i^n - \kappa u_{i+1}^n = u_{i}^{n-1}
+$$
+
+For known boundary values $$ u_0^n $$ and $$ u_N^n $$, the finite difference equations at the unknown nodes $$ i $$ for $$ i=1,2,\cdots,N-1 $$ are
+
+$$
+\begin{alignat}{2}
+i &= 1 \qquad && -\kappa \textcolor{blue}{u_{0}^n} + (1 + 2\kappa) u_1^n - \kappa u_{2}^n = u_{1}^{n-1} \nonumber \\
+i &= 2 \qquad && -\kappa u_{1}^n + (1 + 2\kappa) u_2^n - \kappa u_{3}^n = u_{2}^{n-1} \nonumber \\
+&\, \;\vdots &&\, \qquad \qquad \qquad \qquad \vdots \\
+i &= N-2 \qquad && -\kappa u_{N-3}^n + (1 + 2\kappa) u_{N-2}^n - \kappa u_{N-1}^n = u_{N-2}^{n-1} \nonumber \\
+i &= N-1 \qquad && -\kappa u_{N-2}^n + (1 + 2\kappa) u_{N-1}^n - \kappa \textcolor{blue}{u_{N}^n} = u_{N-1}^{n-1} \nonumber
+\end{alignat}
+$$
+
+In matrix form, this becomes
+
+$$
+\left[ \begin{matrix}
+-\kappa & 1+2\kappa & -\kappa \\
+& -\kappa & 1+2\kappa & -\kappa \\
+&   & \ddots & \ddots & \ddots \\
+&   &   & \ddots & \ddots & \ddots \\
+&   &   &   & -\kappa & 1+2\kappa & -\kappa \\
+&   &   &   &   & -\kappa & 1+2\kappa & -\kappa
+\end{matrix} \right] \left\lbrace \begin{matrix}
+\textcolor{blue}{u_0^n} \\ u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n \\ \textcolor{blue}{u_N^n}  
+\end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
+u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ u_{N-1}^{n-1} \end{matrix} \right\rbrace
+$$
+
+Taking the known boundary values to the right hand side, the system of equations reduce to
+
+$$
+\left[ \begin{matrix}
+1+2\kappa & -\kappa \\
+-\kappa & 1+2\kappa & -\kappa \\
+&   \ddots & \ddots & \ddots \\
+&   &   \ddots & \ddots & \ddots \\
+&   &   &   -\kappa & 1+2\kappa & -\kappa \\
+&   &   &   &   -\kappa & 1+2\kappa 
+\end{matrix} \right] \left\lbrace \begin{matrix}
+u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n  
+\end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
+\kappa \textcolor{blue}{u_0^n} + u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ \kappa \textcolor{blue}{u_N^n} + u_{N-1}^{n-1} \end{matrix} \right\rbrace
+$$
+
+which is a linear system of the form $$ \bm A \bm x = \bm b $$ that can be solved by applying the appropriate method. Like the explicit method, the error in the calculated pore pressure based on the implicit method is first-order accurate in time and second-order accurate in space, i.e. $$ \mathcal{O}(\Delta t) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
+
+### Crank-Nicolson Method
