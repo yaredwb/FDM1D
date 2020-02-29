@@ -289,7 +289,7 @@ $$
 
 where $$ t $$ is the actual time and $$ H $$ is the length of the drainage path. For our example here, where dissipation is allowed at both boundaries, $$ H=0.5 $$ m. The results for the different discretizations are shown in the figure below.
 
-![Explicit result](assets/images/explicit_results.png){: .center-image}
+![Explicit result](assets/images/explicit_results.png){: .center-image }
 *Results for the explicit method*
 
 For the results presented here, time steps are selected such that $$ \kappa \leq 1/2 $$. If this criteria is not satisfied for the explicit method, the numerical solution becomes unstable. To illustrate this consider a spatial discretization where $$ N=80 $$. This implies that $$ \Delta z = 1/80 = 0.0125 $$ m. Thus, the time step requirement is
@@ -300,10 +300,9 @@ $$
 
 The figure below shows oscillations in the computed pore pressure when $$ \Delta t = 50 $$ s is used. A major drawback of the explicit method is that, as the mesh size increases, the time step must decrease, making the analysis more computationally demanding.
 
-![Explicit oscillation](assets/images/explicit_oscillation.png){: .center-image}
-*Oscillations when using the explicit method*
+![Explicit oscillation](assets/images/explicit_oscillation.png){: .center-image }*Oscillations when using the explicit method*
 
 The implicit and Crank-Nicolson schemes are numerically stable and large time steps can be used for various mesh sizes. The plots below show results from the implicit and Crank-Nicolson methods with large time steps than what the explicit method would allow for the mesh size used. The advantage of these methods is that they are numerically stable.
 
-![Implicit and Crank-Nicolson results](assets/images/implicit_and_crank_nicolson_results.png){: .center-image}
+![Implicit and Crank-Nicolson results](assets/images/implicit_and_crank_nicolson_results.png){: .center-image }
 *Results for the implicit and Crank-Nicolson methods*
