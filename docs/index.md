@@ -147,11 +147,11 @@ For known boundary values $$ u_0^n $$ and $$ u_N^n $$, the finite difference equ
 
 $$
 \begin{alignat}{2}
-i &= 1 \qquad && -\kappa \textcolor{blue}{u_{0}^n} + (1 + 2\kappa) u_1^n - \kappa u_{2}^n = u_{1}^{n-1} \nonumber \\
+i &= 1 \qquad && -\kappa u_{0}^n + (1 + 2\kappa) u_1^n - \kappa u_{2}^n = u_{1}^{n-1} \nonumber \\
 i &= 2 \qquad && -\kappa u_{1}^n + (1 + 2\kappa) u_2^n - \kappa u_{3}^n = u_{2}^{n-1} \nonumber \\
 &\, \;\vdots &&\, \qquad \qquad \qquad \qquad \vdots \\
 i &= N-2 \qquad && -\kappa u_{N-3}^n + (1 + 2\kappa) u_{N-2}^n - \kappa u_{N-1}^n = u_{N-2}^{n-1} \nonumber \\
-i &= N-1 \qquad && -\kappa u_{N-2}^n + (1 + 2\kappa) u_{N-1}^n - \kappa \textcolor{blue}{u_{N}^n} = u_{N-1}^{n-1} \nonumber
+i &= N-1 \qquad && -\kappa u_{N-2}^n + (1 + 2\kappa) u_{N-1}^n - \kappa u_{N}^n = u_{N-1}^{n-1} \nonumber
 \end{alignat}
 $$
 
@@ -166,7 +166,7 @@ $$
 &   &   &   & -\kappa & 1+2\kappa & -\kappa \\
 &   &   &   &   & -\kappa & 1+2\kappa & -\kappa
 \end{matrix} \right] \left\lbrace \begin{matrix}
-\textcolor{blue}{u_0^n} \\ u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n \\ \textcolor{blue}{u_N^n}  
+u_0^n \\ u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n \\ u_N^n  
 \end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
 u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ u_{N-1}^{n-1} \end{matrix} \right\rbrace
 $$
@@ -184,7 +184,7 @@ $$
 \end{matrix} \right] \left\lbrace \begin{matrix}
 u_1^n \\ u_2^n \\ \vdots \\ u_{N-2}^n \\ u_{N-1}^n  
 \end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
-\kappa \textcolor{blue}{u_0^n} + u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ \kappa \textcolor{blue}{u_N^n} + u_{N-1}^{n-1} \end{matrix} \right\rbrace
+\kappa u_0^n + u_1^{n-1} \\ u_2^{n-1} \\ \vdots \\ u_{N-2}^{n-1} \\ \kappa u_N^n + u_{N-1}^{n-1} \end{matrix} \right\rbrace
 $$
 
 which is a linear system of the form $$ \boldsymbol{A x = b} $$ that can be solved by applying the appropriate method. Like the explicit method, the error in the calculated pore pressure based on the implicit method is first-order accurate in time and second-order accurate in space, i.e. $$ \mathcal{O}(\Delta t) $$ and $$ \mathcal{O}(\Delta z^2) $$, respectively.
@@ -242,11 +242,11 @@ For an arbitrary value of $$ N $$, with known boundary values $$ u_0^{n+1} $$ an
 
 $$
 \begin{align}
--\frac{\kappa}{2} \textcolor{blue}{u_{0}^{n+1}} + (1+\kappa) u_1^{n+1} - \frac{\kappa}{2} u_{2}^{n+1} &= \frac{\kappa}{2} u_{0}^n + (1-\kappa) u_1^n + \frac{\kappa}{2} u_{2}^n \nonumber \\
+-\frac{\kappa}{2} u_{0}^{n+1} + (1+\kappa) u_1^{n+1} - \frac{\kappa}{2} u_{2}^{n+1} &= \frac{\kappa}{2} u_{0}^n + (1-\kappa) u_1^n + \frac{\kappa}{2} u_{2}^n \nonumber \\
 -\frac{\kappa}{2} u_{1}^{n+1} + (1+\kappa) u_2^{n+1} - \frac{\kappa}{2} u_{3}^{n+1} &= \frac{\kappa}{2} u_{1}^n + (1-\kappa) u_2^n + \frac{\kappa}{2} u_{3}^n \nonumber \\
 \vdots \qquad \qquad \vdots & \qquad \qquad \vdots \\
 -\frac{\kappa}{2} u_{N-3}^{n+1} + (1+\kappa) u_{N-2}^{n+1} - \frac{\kappa}{2} u_{N-1}^{n+1} &= \frac{\kappa}{2} u_{N-3}^n + (1-\kappa) u_{N-2}^n + \frac{\kappa}{2} u_{N-1}^n \nonumber \\
--\frac{\kappa}{2} u_{N-2}^{n+1} + (1+\kappa) u_{N-1}^{n+1} - \frac{\kappa}{2} \textcolor{blue}{u_{N}^{n+1}} &= \frac{\kappa}{2} u_{N-2}^n + (1-\kappa) u_{N-1}^n + \frac{\kappa}{2} u_{N}^n \nonumber
+-\frac{\kappa}{2} u_{N-2}^{n+1} + (1+\kappa) u_{N-1}^{n+1} - \frac{\kappa}{2} u_{N}^{n+1} &= \frac{\kappa}{2} u_{N-2}^n + (1-\kappa) u_{N-1}^n + \frac{\kappa}{2} u_{N}^n \nonumber
 \end{align}
 $$
 
@@ -263,7 +263,7 @@ $$
 \end{matrix} \right] \left\lbrace \begin{matrix}
 u_1^{n+1} \\ u_2^{n+1} \\ \vdots \\ u_{N-2}^{n+1} \\ u_{N-1}^{n+1}  
 \end{matrix} \right\rbrace =  \left\lbrace \begin{matrix}
-b_1 + \frac{\kappa}{2} \textcolor{blue}{u_{0}^{n+1}} \\ b_2 \\ \vdots \\ b_{N-2} \\ b_{N-1} + \frac{\kappa}{2} \textcolor{blue}{u_{N}^{n+1}} \end{matrix} \right\rbrace
+b_1 + \frac{\kappa}{2} u_{0}^{n+1} \\ b_2 \\ \vdots \\ b_{N-2} \\ b_{N-1} + \frac{\kappa}{2} u_{N}^{n+1} \end{matrix} \right\rbrace
 $$
 
 where
