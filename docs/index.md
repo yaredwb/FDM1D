@@ -223,7 +223,7 @@ $$
 
 The stencil for the Crank-Nicolson method is shown in the figure below.
 
-![Stencil for the Crank-Nocolson method](assets/images/crank_nicolson_stencil.png){: .center-image }
+![Stencil for the Crank-Nocolson method](assets/images/crank_nicolson_stencil.png) {: .center-image }
 *Stencil for the Crank-Nicolson method*
 
 Like the implicit method, the Crank-Nicolson method requires solving a system of equations at each time step since the unknown $$ u_i^{n+1} $$ is coupled with its neighboring unknowns $$ u_{i-1}^{n+1} $$ and $$ u_{i+1}^{n+1} $$. From the main difference equation above, we can write
@@ -300,7 +300,8 @@ $$
 
 The figure below shows oscillations in the computed pore pressure when $$ \Delta t = 50 $$ s is used. A major drawback of the explicit method is that, as the mesh size increases, the time step must decrease, making the analysis more computationally demanding.
 
-![Explicit oscillation](assets/images/explicit_oscillation.png){: .center-image }*Oscillations when using the explicit method*
+![Explicit oscillation](assets/images/explicit_oscillation.png){: .center-image }
+*Oscillations when using the explicit method*
 
 The implicit and Crank-Nicolson schemes are numerically stable and large time steps can be used for various mesh sizes. The plots below show results from the implicit and Crank-Nicolson methods with large time steps than what the explicit method would allow for the mesh size used. The advantage of these methods is that they are numerically stable.
 
