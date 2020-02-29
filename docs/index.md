@@ -223,7 +223,7 @@ $$
 
 The stencil for the Crank-Nicolson method is shown in the figure below.
 
-![Stencil for the Crank-Nocolson method](assets/images/crank_nicolson_stencil.png) {: .center-image }
+![Stencil for the Crank-Nocolson method](assets/images/crank_nicolson_stencil.png){: .center-image }
 *Stencil for the Crank-Nicolson method*
 
 Like the implicit method, the Crank-Nicolson method requires solving a system of equations at each time step since the unknown $$ u_i^{n+1} $$ is coupled with its neighboring unknowns $$ u_{i-1}^{n+1} $$ and $$ u_{i+1}^{n+1} $$. From the main difference equation above, we can write
