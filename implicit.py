@@ -50,7 +50,8 @@ for i in range(1,N-1):
 
 # Set initial condition
 for i in range(0, N+1):
-    u_1[i] = 50. Compute the pore pressure for subsequent time steps
+    u_1[i] = 50. 
+# Compute the pore pressure for subsequent time steps
 for n in range(0, Nt):
     # RHS vector b for inner unknown nodes
     for i in range(1,N):
