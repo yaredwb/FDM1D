@@ -30,7 +30,7 @@ t = 86400.0 * 2
 Nt = int(t / dt) + 1
 
 # Create array for storing pore pressures
-u   = np.zeros(N+1)           # unknown u at new time level
+u = np.zeros(N+1)           # unknown u at new time level
 u_1 = np.zeros(N+1)           # u at the previous time level
 
 # Set initial condition
@@ -39,24 +39,24 @@ for i in range(0, N+1):
 
 # Compute the pore pressure for subsequent time steps
 for n in range(0, Nt):
-  # Compute pore pressure at inner nodes
-  for i in range(1,N):
-    u[i] = u_1[i] + k * (u_1[i-1] - 2 * u_1[i] + u_1[i+1])
+    # Compute pore pressure at inner nodes
+    for i in range(1, N):
+        u[i] = u_1[i] + k * (u_1[i-1] - 2 * u_1[i] + u_1[i+1])
 
-    # Insert boundary conditions
-    u[0] = 0.0
-    #u[N] = 0.0
+        # Insert boundary conditions
+        u[0] = 0.0
+        #u[N] = 0.0
 
-  # Update u_1 for next time step
-  u_1[:] = u
+    # Update u_1 for next time step
+    u_1[:] = u
 
-  # Dimensionless time
-  T = cv * n * dt / (H/2)**2
+    # Dimensionless time
+    T = cv * n * dt / (H/2)**2
 
-  # Plot results
-  #if n > 0 and n % (N/2) == 0:
-  if T > 0.0 and T % 0.1 == 0:
-    plt.plot(u,z,label='T = ' + str(T))
+    # Plot results
+    # if n > 0 and n % (N/2) == 0:
+    if T > 0.0 and T % 0.1 == 0:
+        plt.plot(u, z, label='T = ' + str(T))
 
 plt.gca().invert_yaxis()
 plt.gca().xaxis.tick_top()

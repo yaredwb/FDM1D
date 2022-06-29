@@ -29,7 +29,7 @@ t = 86400.0 * 2
 Nt = int(t / dt) + 1
 
 # Create array for storing pore pressures
-u   = np.zeros(N+1)           # unknown u at new time level
+u = np.zeros(N+1)           # unknown u at new time level
 u_1 = np.zeros(N+1)           # u at the previous time level
 
 # Boundary conditions
@@ -37,24 +37,24 @@ u[0] = 0
 u[N] = 0
 
 # Coefficient matrix and RHS vector of linear system Ax = b
-A = np.zeros((N-1,N-1))
+A = np.zeros((N-1, N-1))
 b = np.zeros(N-1)
-for i in range(0,N-1):
-    A[i,i]   = 1 + 2*k
+for i in range(0, N-1):
+    A[i, i] = 1 + 2*k
 
-for i in range(0,N-2):
-    A[i,i+1] = -k
+for i in range(0, N-2):
+    A[i, i+1] = -k
 
-for i in range(1,N-1):
-    A[i,i-1] = -k
+for i in range(1, N-1):
+    A[i, i-1] = -k
 
 # Set initial condition
 for i in range(0, N+1):
-    u_1[i] = 50. 
+    u_1[i] = 50.
 # Compute the pore pressure for subsequent time steps
 for n in range(0, Nt):
     # RHS vector b for inner unknown nodes
-    for i in range(1,N):
+    for i in range(1, N):
         b[i-1] = u_1[i]
 
     # Insert boundary conditions to RHS vector
@@ -62,7 +62,7 @@ for n in range(0, Nt):
     b[N-2] += k * u[N]
 
     # Solve linear system
-    u[1:N] = lin.solve(A,b)
+    u[1:N] = lin.solve(A, b)
 
     # Update u_1 for next time step
     u_1[:] = u
@@ -71,9 +71,9 @@ for n in range(0, Nt):
     T = cv * n * dt / (H/2)**2
 
     # Plot results
-    #if T >= 0.2 and T < 0.25 :
+    # if T >= 0.2 and T < 0.25 :
     if T > 0.0 and T % 0.1 == 0:
-        plt.plot(u,z,label='T = ' + str(T))
+        plt.plot(u, z, label='T = ' + str(T))
 
 plt.gca().invert_yaxis()
 plt.gca().xaxis.tick_top()
